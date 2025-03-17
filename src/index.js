@@ -13,7 +13,6 @@
 
 import { calculateFileHash, getFileMimeType } from "./utils/metadata.js";
 import { detectFileEncoding, readFileWithEncoding } from "./utils/encoding.js";
-import { existsSync, readFileSync } from "fs";
 import {
   formatCSV,
   formatHTML,
@@ -26,12 +25,12 @@ import {
 import chalk from "chalk";
 import { defaultConfig } from "./config/defaults.js";
 import { fileURLToPath } from "url";
-import fs from "fs/promises";
 import { initializeCLI } from "./cli/index.js";
 import { isBinaryFile } from "./utils/file-detection.js";
 import { logger } from "./utils/logger.js";
 import path from "path";
 import { processDirectory } from "./core/processor.js";
+import { readFileSync } from "fs";
 
 // Internal modules
 
@@ -44,7 +43,6 @@ try {
   packageJson = JSON.parse(
     readFileSync(path.join(__dirname, "..", "package.json"), "utf8"),
   );
-  logger.debug("Successfully loaded package.json");
 } catch (error) {
   logger.error(`Error reading package.json: ${error.message}`);
   packageJson = { version: "unknown" };
@@ -53,7 +51,7 @@ try {
 // Initialize CLI if this file is being executed directly
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   try {
-    logger.debug("Starting CLI execution");
+    logger.info("Starting CLI execution");
     initializeCLI(packageJson.version);
   } catch (error) {
     logger.fatal(`Fatal error in CLI initialization: ${error.message}`);
@@ -62,6 +60,8 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
       logger.fatal(error.stack);
     }
     process.exit(1);
+  } finally {
+    logger.success("CLI execution completed");
   }
 }
 

@@ -214,6 +214,7 @@ async function handleAction(directory, options) {
 
     // Handle output
     await handleOutput(result, config);
+    process.exit(0);
   } catch (error) {
     logger.error(`Error: ${error.message}`);
     console.error(chalk.red(`Error: ${error.message}`));
@@ -241,9 +242,9 @@ async function loadConfigFile(configPath, defaultConfig) {
   }
 
   try {
-    logger.debug(`Loading config from ${resolvedPath}`);
+    logger.info(`Loading config from ${resolvedPath}`);
     const fileConfig = JSON.parse(readFileSync(resolvedPath, "utf8"));
-    logger.debug(`Successfully loaded config file`);
+    logger.success(`Successfully loaded config file`);
     return { ...defaultConfig, ...fileConfig };
   } catch (error) {
     logger.error(`Error parsing config file: ${error.message}`);

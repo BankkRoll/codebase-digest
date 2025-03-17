@@ -731,7 +731,7 @@ Contributions are welcome! Please follow these steps:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/codebase-digest.git
+git clone https://github.com/BankkRoll/codebase-digest.git
 cd codebase-digest
 
 # Install dependencies

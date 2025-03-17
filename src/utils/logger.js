@@ -132,4 +132,15 @@ export const logger = {
       console.error(chalk.bgRed.white(this._format("FATAL", message)));
     }
   },
+
+  /**
+   * Logs a success message
+   *
+   * @param {string} message - Message to log
+   */
+  success(message) {
+    if (currentLogLevel <= LOG_LEVELS.INFO) {
+      console.log(chalk.green(this._format("SUCCESS", message)));
+    }
+  },
 };

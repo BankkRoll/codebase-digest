@@ -9,7 +9,6 @@
 
 import { calculateFileHash, getFileMimeType } from "../utils/metadata.js";
 import { createHexdump, readFileWithEncoding } from "../utils/encoding.js";
-import { createReadStream, createWriteStream } from "fs";
 import { existsSync, readFileSync, statSync } from "fs";
 import {
   formatCSV,
@@ -21,7 +20,6 @@ import {
 } from "../formatters/index.js";
 import { isBinaryFile, shouldProcessFile } from "../utils/file-detection.js";
 
-import { createGunzip } from "zlib";
 import { createGzip } from "zlib";
 import { defaultConfig } from "../config/defaults.js";
 import fs from "fs/promises";
@@ -29,7 +27,6 @@ import { glob } from "glob";
 import ignore from "ignore";
 import { logger } from "../utils/logger.js";
 import path from "path";
-import { pipeline } from "stream/promises";
 
 /**
  * Processes a file and extracts its content and metadata
@@ -53,7 +50,7 @@ export const processFile = async (filePath, relativePath, config) => {
 
     if (!shouldProcess) {
       if (config.verbose) {
-        logger.info(`Skipping file ${relativePath}: ${reason}`);
+        logger.debug(`Skipping file ${relativePath}: ${reason}`);
       }
       return null;
     }
@@ -267,7 +264,7 @@ export async function processDirectory(directory, userConfig = {}) {
     logger.setLevel(
       config.verbose ? "DEBUG" : config.silent ? "ERROR" : "INFO",
     );
-    logger.debug(`Processing directory: ${directory}`);
+    logger.info(`Processing directory: ${directory}`);
     logger.debug(`Configuration: ${JSON.stringify(config, null, 2)}`);
 
     // Create a timeout promise
