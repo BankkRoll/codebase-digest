@@ -8,6 +8,7 @@ A high-performance, enterprise-grade utility for transforming codebases into str
 ## Table of Contents
 
 - [Overview](#overview)
+- [Project Structure](#project-structure)
 - [Technical Architecture](#technical-architecture)
 - [Installation](#installation)
 - [Command-Line Interface](#command-line-interface)
@@ -41,6 +42,40 @@ Codebase Digest is an advanced tool designed to transform source code repositori
 - **Code Analytics**: Statistical summaries, language detection, and structural analysis
 - **Enterprise-grade Error Handling**: Retry mechanisms, timeout protection, and graceful degradation
 
+## Project Structure
+
+```
+codebase-digest/
+├── package-lock.json
+├── package.json
+├── README.md
+├── src
+│   ├── cli
+│   │   └── index.js
+│   ├── config
+│   │   ├── defaults.js
+│   │   └── language-map.js
+│   ├── core
+│   │   └── processor.js
+│   ├── formatters
+│   │   ├── csv-formatter.js
+│   │   ├── html-formatter.js
+│   │   ├── index.js
+│   │   ├── json-formatter.js
+│   │   ├── markdown-formatter.js
+│   │   ├── text-formatter.js
+│   │   └── xml-formatter.js
+│   ├── index.js
+│   └── utils
+│       ├── encoding.js
+│       ├── escape.js
+│       ├── file-detection.js
+│       ├── git.js
+│       ├── logger.js
+│       ├── metadata.js
+│       └── progress.js
+```
+
 ## Technical Architecture
 
 Codebase Digest employs a modular architecture with the following components:
@@ -51,6 +86,15 @@ Codebase Digest employs a modular architecture with the following components:
 4. **Output Formatting System**: Transforms processed content into the requested output format
 5. **Concurrency Management**: Orchestrates parallel processing with configurable limits
 6. **Error Management Framework**: Provides robust error handling with retry capabilities
+
+### Module Breakdown
+
+- **src/index.js**: Main entry point exposing the public API
+- **src/cli/index.js**: Command-line interface implementation
+- **src/config/**: Configuration management and defaults
+- **src/core/**: Core processing logic
+- **src/formatters/**: Output format implementations
+- **src/utils/**: Utility functions and helpers
 
 ## Installation
 
@@ -425,12 +469,12 @@ import App from './App';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 ```
+```
 
 ### JSON Format
 
 Structured JSON with comprehensive metadata:
 
-```
 ```json
 [
   {
@@ -695,6 +739,14 @@ npm test
 # Build the project
 npm run build
 ```
+
+### Documentation
+
+Please update the documentation when adding or modifying features:
+
+1. Update the README.md file
+2. Update JSDoc comments in the code
+3. Update the example configuration if necessary
 
 ## License
 
