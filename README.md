@@ -32,17 +32,21 @@ A high-performance, enterprise-grade utility for transforming codebases into str
 
 ```
 codebase-digest/
-├── package-lock.json
 ├── package.json
 ├── README.md
 ├── src
+│   ├── index.js
+│   │
 │   ├── cli
 │   │   └── index.js
+│   │
 │   ├── config
 │   │   ├── defaults.js
 │   │   └── language-map.js
+│   │
 │   ├── core
 │   │   └── processor.js
+│   │
 │   ├── formatters
 │   │   ├── csv-formatter.js
 │   │   ├── html-formatter.js
@@ -51,7 +55,7 @@ codebase-digest/
 │   │   ├── markdown-formatter.js
 │   │   ├── text-formatter.js
 │   │   └── xml-formatter.js
-│   ├── index.js
+│   │
 │   └── utils
 │       ├── encoding.js
 │       ├── escape.js
@@ -440,7 +444,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 Structured markdown with syntax highlighting and collapsible metadata:
 
-```markdown
+````markdown
 # Code Digest
 
 ## Summary
@@ -469,7 +473,7 @@ import App from './App';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 ```
-```
+````
 
 ### JSON Format
 
