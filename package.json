@@ -9,8 +9,14 @@
   },
   "scripts": {
     "start": "node src/index.js",
-    "format": "prettier --write src/",
-    "prepublishOnly": "npm run format"
+    "format": "prettier --write {src,tests}/**/*.{js,ts,jsx,tsx}",
+    "prepublishOnly": "npm run format",
+    "test": "vitest run",
+    "test:unit": "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration",
+    "test:e2e": "vitest run tests/e2e",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [
     "code",

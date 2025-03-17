@@ -740,6 +740,18 @@ npm test
 npm run build
 ```
 
+### Testing
+
+All new features and bug fixes should include tests:
+
+```bash
+# Run all tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+```
+
 ### Documentation
 
 Please update the documentation when adding or modifying features:
