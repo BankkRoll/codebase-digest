@@ -28,20 +28,6 @@ A high-performance, enterprise-grade utility for transforming codebases into str
 - [Contributing](#contributing)
 - [License](#license)
 
-## Overview
-
-Codebase Digest is an advanced tool designed to transform source code repositories into structured text representations optimized for machine learning model ingestion, documentation generation, and code analysis. It offers comprehensive configuration options, parallel processing capabilities, and intelligent handling of diverse file types and encodings.
-
-### Key Capabilities
-
-- **Multi-format Output Generation**: Text, JSON, Markdown, CSV, HTML, and XML
-- **Intelligent File Processing**: Binary detection, encoding recognition, and MIME type identification
-- **Advanced Filtering System**: Pattern-based inclusion/exclusion with support for standard ignore files
-- **Parallel Processing Engine**: Configurable concurrency with intelligent workload distribution
-- **Comprehensive Metadata Extraction**: File statistics, cryptographic hashes, and modification timestamps
-- **Code Analytics**: Statistical summaries, language detection, and structural analysis
-- **Enterprise-grade Error Handling**: Retry mechanisms, timeout protection, and graceful degradation
-
 ## Project Structure
 
 ```
@@ -75,6 +61,20 @@ codebase-digest/
 │       ├── metadata.js
 │       └── progress.js
 ```
+
+## Overview
+
+Codebase Digest is an advanced tool designed to transform source code repositories into structured text representations optimized for machine learning model ingestion, documentation generation, and code analysis. It offers comprehensive configuration options, parallel processing capabilities, and intelligent handling of diverse file types and encodings.
+
+### Key Capabilities
+
+- **Multi-format Output Generation**: Text, JSON, Markdown, CSV, HTML, and XML
+- **Intelligent File Processing**: Binary detection, encoding recognition, and MIME type identification
+- **Advanced Filtering System**: Pattern-based inclusion/exclusion with support for standard ignore files
+- **Parallel Processing Engine**: Configurable concurrency with intelligent workload distribution
+- **Comprehensive Metadata Extraction**: File statistics, cryptographic hashes, and modification timestamps
+- **Code Analytics**: Statistical summaries, language detection, and structural analysis
+- **Enterprise-grade Error Handling**: Retry mechanisms, timeout protection, and graceful degradation
 
 ## Technical Architecture
 
