@@ -57,7 +57,7 @@ export CODEDIGEST_EXCLUDE="**/*.test.js"
 ```
 
 ### 4. Programmatic Configuration
-```javascript
+```js
 import { processDirectory, defaultConfig } from 'codebase-digest';
 
 const config = {
@@ -190,7 +190,7 @@ await processDirectory('./src', config);
 
 ## Basic Configuration
 
-```javascript
+```js
 {
   // Output format: 'json', 'text', 'markdown', or 'tree'
   outputFormat: 'json',
@@ -212,7 +212,7 @@ await processDirectory('./src', config);
 
 ## Advanced Configuration
 
-```javascript
+```js
 {
   // Code analysis options
   codeStatistics: true,    // Include code statistics
@@ -241,7 +241,7 @@ await processDirectory('./src', config);
 
 The following languages are supported with syntax highlighting and special processing:
 
-```javascript
+```js
 {
   // Core languages
   javascript: ['.js', '.jsx', '.mjs'],
@@ -266,7 +266,7 @@ The following languages are supported with syntax highlighting and special proce
 
 ## Performance Tuning
 
-```javascript
+```js
 {
   // Parallel processing
   parallel: true,
@@ -287,7 +287,7 @@ The following languages are supported with syntax highlighting and special proce
 ## Output Formatting
 
 ### JSON Format
-```javascript
+```js
 {
   outputFormat: 'json',
   pretty: true,
@@ -297,7 +297,7 @@ The following languages are supported with syntax highlighting and special proce
 ```
 
 ### Markdown Format
-```javascript
+```js
 {
   outputFormat: 'markdown',
   includeLineNumbers: true,
@@ -308,7 +308,7 @@ The following languages are supported with syntax highlighting and special proce
 ```
 
 ### Text Format
-```javascript
+```js
 {
   outputFormat: 'text',
   includeHeaders: true,
@@ -318,7 +318,7 @@ The following languages are supported with syntax highlighting and special proce
 ```
 
 ### Tree Format
-```javascript
+```js
 {
   outputFormat: 'tree',
   showSizes: true,
@@ -330,7 +330,7 @@ The following languages are supported with syntax highlighting and special proce
 
 ## Security Options
 
-```javascript
+```js
 {
   // File security
   includeFileHash: true,

@@ -12,30 +12,30 @@
 
 ## Installation
 
-```bash
 # Global installation
+```bash
 npm install -g codebase-digest
 ```
 
-```bash
 # Local project installation
+```bash
 npm install --save-dev codebase-digest
 ```
 
 ## Basic Usage
 
-```bash
 # Basic directory processing
+```bash
 codebase-digest ./src
 ```
 
-```bash
 # Specify output format and file
+```bash
 codebase-digest ./src -f json -o output.json
 ```
 
-```bash
 # Process with specific configuration
+```bash
 codebase-digest ./src --config digest.config.json
 ```
 
@@ -152,7 +152,7 @@ Example output:
 # Source Code Digest
 
 ## src/index.js
-```javascript
+```js
 1  const main = () => {
 2    console.log('Hello');
 3  };
@@ -191,19 +191,21 @@ Example output:
 ## Advanced Usage
 
 ### Using Configuration Files
-```bash
+
 # Create default config
+```bash
 codebase-digest init > digest.config.json
 ```
 
-```bash
 # Use config file
+```bash
 codebase-digest ./src --config digest.config.json
 ```
 
 ### Processing Large Codebases
-```bash
+
 # Parallel processing with memory limits
+```bash
 codebase-digest ./src \
   --parallel \
   --max-processes 8 \
@@ -212,8 +214,9 @@ codebase-digest ./src \
 ```
 
 ### Security Auditing
-```bash
+
 # Full security scan
+```bash
 codebase-digest ./src \
   --security-scan \
   --hash-files \
@@ -222,8 +225,9 @@ codebase-digest ./src \
 ```
 
 ### Documentation Generation
-```bash
+
 # Generate comprehensive docs
+```bash
 codebase-digest ./src \
   -f markdown \
   --line-numbers \
@@ -256,24 +260,26 @@ DIGEST_LOG_FILE=digest.log
 ## Examples
 
 ### Basic Examples
-```bash
+
 # Process current directory
+```bash
 codebase-digest .
 ```
 
-```bash
 # Process specific directory with output
+```bash
 codebase-digest ./src -o digest.json
 ```
 
-```bash
 # Use specific format
+```bash
 codebase-digest ./src -f markdown
 ```
 
 ### Advanced Examples
-```bash
+
 # Generate documentation
+```bash
 codebase-digest ./src \
   -f markdown \
   --line-numbers \
@@ -282,8 +288,8 @@ codebase-digest ./src \
   -o DOCUMENTATION.md
 ```
 
-```bash
 # Security audit
+```bash
 codebase-digest ./src \
   -f json \
   --security-scan \
@@ -292,8 +298,8 @@ codebase-digest ./src \
   -o security-report.json
 ```
 
-```bash
 # Code analysis
+```bash
 codebase-digest ./src \
   --statistics \
   --metrics \

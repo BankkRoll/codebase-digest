@@ -37,25 +37,25 @@ Codebase Digest transforms source code repositories into structured text represe
 
 ### Installation
 
-```bash
 # Global installation
+```bash
 npm install -g codebase-digest
 ```
 
-```bash
 # Local project installation
+```bash
 npm install --save-dev codebase-digest
 ```
 
 ### Basic Usage
 
-```bash
 # CLI usage
+```bash
 codebase-digest ./src -f json -o output.json
 ```
 
-```bash
 # Node.js usage
+```js
 import { processDirectory } from 'codebase-digest';
 const result = await processDirectory('./src');
 ```
@@ -115,9 +115,9 @@ Content: ...
 ### JSON
 Structured data format for programmatic usage:
 ```json
-  {
-    "path": "src/index.js",
-    "size": 1280,
+{
+  "path": "src/index.js",
+  "size": 1280,
   "content": "..."
 }
 ```
@@ -144,23 +144,23 @@ Hierarchical view of codebase structure:
 
 1. **LLM Processing**
 ```bash
-   codebase-digest ./src --llm-format --strip-comments
-   ```
+codebase-digest ./src --llm-format --strip-comments
+```
 
 2. **Documentation**
 ```bash
-   codebase-digest ./src -f markdown --code-statistics
-   ```
+codebase-digest ./src -f markdown --code-statistics
+```
 
 3. **Code Analysis**
 ```bash
-   codebase-digest ./src --code-metrics --git-stats
-   ```
+codebase-digest ./src --code-metrics --git-stats
+```
 
 4. **Security Audit**
 ```bash
-   codebase-digest ./src --security-scan --dependency-check
-   ```
+codebase-digest ./src --security-scan --dependency-check
+```
 
 See [CLI Documentation](CLI.md) for more advanced examples.
 

@@ -47,21 +47,21 @@ The `integrations` directory shows how to integrate codebase-digest with popular
 ## Getting Started
 
 1. Install codebase-digest:
-   ```bash
-   npm install -g codebase-digest
-   ```
+```bash
+npm install -g codebase-digest
+```
 
 2. Try the API example:
-   ```bash
-   cd api-usage
-   node analyze-project.js /path/to/project
-   ```
+```bash
+cd api-usage
+node analyze-project.js /path/to/project
+```
 
 3. Test a plugin:
-   ```bash
-   cd plugins
-   node custom-formatter.js
-   ```
+```bash
+cd plugins
+node custom-formatter.js
+```
 
 4. Set up GitHub Actions integration:
    - Copy the `github-action.yml` to your project's `.github/workflows` directory

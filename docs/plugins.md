@@ -24,7 +24,7 @@ Codebase Digest supports a flexible plugin system that allows you to extend its 
 
 Formatter plugins allow you to create custom output formats:
 
-```javascript
+```js
 // custom-formatter.js
 export default class CustomFormatter {
   constructor(options = {}) {
@@ -42,7 +42,7 @@ export default class CustomFormatter {
 
 Filter plugins provide custom file filtering logic:
 
-```javascript
+```js
 // custom-filter.js
 export default class CustomFilter {
   constructor(options = {}) {
@@ -60,7 +60,7 @@ export default class CustomFilter {
 
 Language detector plugins add support for new file types:
 
-```javascript
+```js
 // custom-language-detector.js
 export default class CustomLanguageDetector {
   constructor(options = {}) {
@@ -81,7 +81,7 @@ export default class CustomLanguageDetector {
 
 Transformer plugins modify file content:
 
-```javascript
+```js
 // custom-transformer.js
 export default class CustomTransformer {
   constructor(options = {}) {
@@ -99,7 +99,7 @@ export default class CustomTransformer {
 
 Security analyzer plugins perform custom security checks:
 
-```javascript
+```js
 // security-analyzer.js
 export default class SecurityAnalyzer {
   constructor(options = {}) {
@@ -122,7 +122,7 @@ export default class SecurityAnalyzer {
 2. Export a class that implements the appropriate plugin interface
 3. Register your plugin with Codebase Digest
 
-```javascript
+```js
 import { registerPlugin } from 'codebase-digest';
 import CustomFormatter from './custom-formatter';
 
@@ -135,7 +135,7 @@ registerPlugin('formatter', 'custom', CustomFormatter);
 
 All plugins must implement:
 
-```javascript
+```js
 class BasePlugin {
   constructor(options = {}) {
     this.options = options;
@@ -153,7 +153,7 @@ class BasePlugin {
 
 ### Formatter Plugin Interface
 
-```javascript
+```js
 class FormatterPlugin extends BasePlugin {
   format(files) {
     // Required: Transform files into output format
@@ -169,7 +169,7 @@ class FormatterPlugin extends BasePlugin {
 
 ### Filter Plugin Interface
 
-```javascript
+```js
 class FilterPlugin extends BasePlugin {
   shouldInclude(file) {
     // Required: Return true/false
@@ -185,7 +185,7 @@ class FilterPlugin extends BasePlugin {
 
 ### Language Detector Interface
 
-```javascript
+```js
 class LanguageDetectorPlugin extends BasePlugin {
   detect(file) {
     // Required: Return language info
@@ -204,7 +204,7 @@ class LanguageDetectorPlugin extends BasePlugin {
 
 ### Transformer Interface
 
-```javascript
+```js
 class TransformerPlugin extends BasePlugin {
   transform(content, file) {
     // Required: Transform content
@@ -220,7 +220,7 @@ class TransformerPlugin extends BasePlugin {
 
 ### Security Analyzer Interface
 
-```javascript
+```js
 class SecurityAnalyzerPlugin extends BasePlugin {
   analyze(file) {
     // Required: Perform security analysis
@@ -241,7 +241,7 @@ class SecurityAnalyzerPlugin extends BasePlugin {
 
 ### Custom HTML Formatter
 
-```javascript
+```js
 // html-formatter.js
 export default class HTMLFormatter {
   constructor(options = {}) {
@@ -297,7 +297,7 @@ export default class HTMLFormatter {
 
 ### Custom Security Analyzer
 
-```javascript
+```js
 // security-analyzer.js
 export default class SecurityAnalyzer {
   constructor(options = {}) {

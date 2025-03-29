@@ -30,7 +30,7 @@
 
 The Codebase Digest API provides a comprehensive set of functions for processing codebases programmatically. Here are the main exported functions:
 
-```javascript
+```js
 import {
   processDirectory,    // Process a directory and return a digest
   isBinaryFile,       // Check if a file is binary
@@ -50,7 +50,7 @@ import {
 
 ### Directory Processing
 
-```javascript
+```js
 import { processDirectory, defaultConfig } from 'codebase-digest';
 
 // Basic usage
@@ -74,7 +74,7 @@ const result = await processDirectory('./src', {
 
 ### File Operations
 
-```javascript
+```js
 import { 
   isBinaryFile, 
   detectFileEncoding,
@@ -101,7 +101,7 @@ const mimeType = await getFileMimeType('path/to/file');
 
 ### Formatting
 
-```javascript
+```js
 import { 
   formatJSON,
   formatMarkdown,
@@ -137,7 +137,7 @@ const treeOutput = formatTree(files, {
 ## Advanced Usage
 
 ### Custom Configuration
-```javascript
+```js
 import { processDirectory, defaultConfig } from 'codebase-digest';
 
 async function generateCustomDigest() {
@@ -158,7 +158,7 @@ async function generateCustomDigest() {
 ```
 
 ### Parallel Processing
-```javascript
+```js
 import { processDirectory } from 'codebase-digest';
 
 const result = await processDirectory('./src', {
@@ -172,7 +172,7 @@ const result = await processDirectory('./src', {
 ```
 
 ### Stream Processing
-```javascript
+```js
 import { createDigestStream } from 'codebase-digest';
 
 const stream = createDigestStream({
@@ -194,7 +194,7 @@ await stream.process('./src');
 ## Configuration Examples
 
 ### Documentation Generation
-```javascript
+```js
 const config = {
   outputFormat: 'markdown',
   includeLineNumbers: true,
@@ -208,7 +208,7 @@ const config = {
 ```
 
 ### LLM Processing
-```javascript
+```js
 const config = {
   outputFormat: 'text',
   commentStripping: true,
@@ -221,7 +221,7 @@ const config = {
 ```
 
 ### Code Analysis
-```javascript
+```js
 const config = {
   outputFormat: 'json',
   codeStatistics: true,
@@ -235,7 +235,7 @@ const config = {
 ```
 
 ### Security Audit
-```javascript
+```js
 const config = {
   outputFormat: 'json',
   includeFileHash: true,
@@ -250,7 +250,7 @@ const config = {
 ## Error Handling
 
 ### Basic Error Handling
-```javascript
+```js
 try {
   const result = await processDirectory('./src');
 } catch (error) {
@@ -265,7 +265,7 @@ try {
 ```
 
 ### Retry Logic
-```javascript
+```js
 const config = {
   retryCount: 3,
   retryDelay: 1000,
@@ -282,7 +282,7 @@ try {
 ```
 
 ### Progress and Events
-```javascript
+```js
 const config = {
   onProgress: (processed, total) => {
     console.log(`Progress: ${(processed / total * 100).toFixed(2)}%`);
@@ -302,7 +302,7 @@ const config = {
 ## Common Use Cases
 
 ### Generate Documentation
-```javascript
+```js
 import { processDirectory, formatMarkdown } from 'codebase-digest';
 
 async function generateDocs() {
@@ -323,7 +323,7 @@ async function generateDocs() {
 ```
 
 ### Process for LLM
-```javascript
+```js
 import { processDirectory, formatText } from 'codebase-digest';
 
 async function prepareLLMInput() {
@@ -343,7 +343,7 @@ async function prepareLLMInput() {
 ```
 
 ### Code Analysis Report
-```javascript
+```js
 import { processDirectory, formatJSON } from 'codebase-digest';
 
 async function analyzeCode() {
@@ -363,7 +363,7 @@ async function analyzeCode() {
 ```
 
 ### Security Audit
-```javascript
+```js
 import { processDirectory, calculateFileHash } from 'codebase-digest';
 
 async function securityAudit() {
