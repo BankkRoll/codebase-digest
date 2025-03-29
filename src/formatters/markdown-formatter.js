@@ -7,9 +7,14 @@
  */
 
 import path from "path";
+import { defaultConfig } from "../config/defaults.js";
 import { getLanguageForExtension } from "../config/language-map.js";
 import { logger } from "../utils/logger.js";
 import { formatFileSize } from "../utils/metadata.js";
+
+// Header styling constants
+const HEADER_LINE = "=".repeat(50);
+const SUBHEADER_LINE = "-".repeat(50);
 
 /**
  * Formats file contents as markdown with syntax highlighting
@@ -21,9 +26,10 @@ import { formatFileSize } from "../utils/metadata.js";
 export const formatMarkdown = (fileContents, config = {}) => {
   logger.debug("Formatting output as markdown");
 
-  const { includeMetadata = false } = config;
+  // Merge with default config
+  config = { ...defaultConfig, ...config };
 
-  const lines = ["# Code Digest\n"];
+  const lines = [`${HEADER_LINE}\n# Code Digest\n${HEADER_LINE}\n\n`];
 
   if (fileContents.length === 0) {
     lines.push("No files processed.\n");
@@ -37,14 +43,15 @@ export const formatMarkdown = (fileContents, config = {}) => {
 
   fileContents.forEach((file) => {
     const normalizedPath = file.path.replace(/\\/g, "/");
-    lines.push(`## ${normalizedPath}\n`);
+    lines.push(`${SUBHEADER_LINE}\n## ${normalizedPath}\n${SUBHEADER_LINE}\n`);
 
-    if (includeMetadata) {
-      if (file.size) lines.push(`Size: ${formatFileSize(file.size)}`);
-      if (file.modified) lines.push(`Modified: ${file.modified}`);
-      if (file.extension) lines.push(`Extension: ${file.extension}`);
-      if (file.language) lines.push(`Language: ${file.language}`);
-      lines.push(""); // Empty line after metadata
+    if (config.includeMetadata) {
+      lines.push("### File Information");
+      if (file.size) lines.push(`- Size: ${formatFileSize(file.size)}`);
+      if (file.modified) lines.push(`- Modified: ${file.modified}`);
+      if (file.extension) lines.push(`- Extension: ${file.extension}`);
+      if (file.language) lines.push(`- Language: ${file.language}`);
+      lines.push("\n"); // Empty line after metadata
     }
 
     if (file.error) {
@@ -56,20 +63,22 @@ export const formatMarkdown = (fileContents, config = {}) => {
     const ext = file.extension || path.extname(file.path).substring(1);
     const language = getLanguageForExtension(ext);
 
+    lines.push("### File Contents\n");
+
     if (config.includeLineNumbers) {
-      const lines = file.content.split("\n");
-      lines.push("```" + language + "\n");
+      const contentLines = file.content.split("\n");
+      lines.push("```" + language);
       lines.push(
-        lines
+        contentLines
           .map((line, i) => `${String(i + 1).padStart(5)} ${line}`)
           .join("\n"),
       );
-      lines.push("\n```\n\n");
+      lines.push("```\n\n");
     } else {
-      lines.push("```" + language + "\n");
+      lines.push("```" + language);
       lines.push(file.content);
       if (!file.content.endsWith("\n")) {
-        lines.push("\n");
+        lines.push("");
       }
       lines.push("```\n\n");
     }

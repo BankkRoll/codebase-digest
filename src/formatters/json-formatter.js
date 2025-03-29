@@ -7,6 +7,7 @@
  */
 
 import path from "path";
+import { defaultConfig } from "../config/defaults.js";
 import { getLanguageForExtension } from "../config/language-map.js";
 import { logger } from "../utils/logger.js";
 
@@ -21,18 +22,19 @@ export const formatJSON = (fileContents, config = {}) => {
   logger.debug("Formatting output as JSON");
 
   try {
-    const { includeMetadata = false, excludeContent = false } = config;
+    // Merge with default config
+    config = { ...defaultConfig, ...config };
 
     const files = fileContents.map((file) => {
       const fileObj = {
         path: file.path.replace(/\\/g, "/"),
       };
 
-      if (!excludeContent) {
+      if (!config.excludeContent) {
         fileObj.content = file.content || "";
       }
 
-      if (includeMetadata) {
+      if (config.includeMetadata) {
         if (file.size !== undefined) {
           fileObj.size = file.size;
         }

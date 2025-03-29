@@ -6,6 +6,7 @@
  * @module formatters/tree-formatter
  */
 
+import { defaultConfig } from "../config/defaults.js";
 import { logger } from "../utils/logger.js";
 
 /**
@@ -35,8 +36,11 @@ function formatFileSize(size) {
  * @param {Object} config - Configuration object
  * @returns {string} Formatted tree output
  */
-export const formatTree = (fileContents, config) => {
+export const formatTree = (fileContents, config = {}) => {
   logger.debug("Formatting output as tree structure");
+
+  // Merge with default config
+  config = { ...defaultConfig, ...config };
 
   if (fileContents.length === 0) {
     return "Empty directory\n";

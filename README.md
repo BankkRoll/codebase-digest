@@ -59,8 +59,9 @@ const result = await processDirectory('./src');
 ## Documentation
 
 Comprehensive documentation is available in:
-- [CLI Documentation](CLI.md) - Complete command-line interface guide with examples
-- [API Documentation](API.md) - Detailed programmatic API reference and usage patterns
+- [CLI Documentation](./docs/cli.md) - Complete command-line interface guide with examples
+- [API Documentation](./docs/api.md) - Detailed programmatic API reference and usage patterns
+- [Examples](./examples) - examples
 
 ## Project Structure
 
@@ -81,7 +82,21 @@ codebase-digest/
 │       ├── git.js
 │       ├── logger.js
 │       └── metadata.js
+├── docs/              # Documentation
+│   ├── api.md         # API reference
+│   ├── cli.md         # CLI usage guide
+│   ├── configuration.md # Configuration options
+│   └── plugins.md     # Plugin development guide
+└── examples/          # Example implementations
+    ├── api-usage/     # Programmatic usage examples
+    ├── plugins/       # Plugin examples
+    └── integrations/  # Third-party integrations
 ```
+
+The project is organized to provide a clear separation of concerns:
+- `src/`: Contains the core implementation
+- `docs/`: Comprehensive documentation for all aspects of the tool
+- `examples/`: Real-world usage examples and integrations
 
 ## Output Formats
 

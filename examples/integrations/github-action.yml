@@ -1,0 +1,159 @@
+name: Code Analysis
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sundays
+
+jobs:
+  analyze:
+    name: Analyze Codebase
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Full git history for better analysis
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          npm install -g codebase-digest
+          npm ci
+
+      - name: Run Code Analysis
+        run: |
+          # Run full analysis
+          codebase-digest . \
+            --format markdown \
+            --output analysis/full-report.md \
+            --include-metadata \
+            --filter complexity \
+            --max-complexity 15
+
+          # Run security analysis
+          codebase-digest . \
+            --analyzer security \
+            --output analysis/security-report.md \
+            --include "src/**/*.{js,ts,jsx,tsx}"
+
+          # Generate statistics
+          codebase-digest . \
+            --format json \
+            --output analysis/stats.json \
+            --include-statistics
+
+      - name: Check for Critical Issues
+        run: |
+          # Check security report for critical issues
+          if grep -q "CRITICAL Severity Issues" analysis/security-report.md; then
+            echo "Critical security issues found!"
+            exit 1
+          fi
+
+          # Check complexity report for high complexity files
+          if grep -q "Complexity score > 20" analysis/full-report.md; then
+            echo "Files with very high complexity found!"
+            exit 1
+          fi
+
+      - name: Generate Badge
+        run: |
+          # Generate status badge based on analysis results
+          ISSUES=$(grep -c "## Issue" analysis/full-report.md || echo "0")
+          if [ "$ISSUES" -eq "0" ]; then
+            STATUS="passing"
+            COLOR="brightgreen"
+          elif [ "$ISSUES" -lt "5" ]; then
+            STATUS="warning"
+            COLOR="yellow"
+          else
+            STATUS="failing"
+            COLOR="red"
+          fi
+          
+          # Create badge using shields.io
+          curl -o analysis/badge.svg \
+            "https://img.shields.io/badge/code%20quality-$STATUS-$COLOR"
+
+      - name: Upload Analysis Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-analysis
+          path: analysis/
+          retention-days: 14
+
+      - name: Create Issue on Failure
+        if: failure()
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const securityReport = fs.readFileSync('analysis/security-report.md', 'utf8');
+            const fullReport = fs.readFileSync('analysis/full-report.md', 'utf8');
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🚨 Code Analysis Issues Found',
+              body: `
+                Code analysis found critical issues that need attention.
+
+                ### Security Issues
+                ${securityReport}
+
+                ### Code Quality Issues
+                ${fullReport}
+
+                Please review and fix these issues as soon as possible.
+              `,
+              labels: ['security', 'code-quality', 'needs-review']
+            });
+
+      - name: Update PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('analysis/full-report.md', 'utf8');
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `## Code Analysis Results\n\n${report}`
+            });
+
+  notify:
+    needs: analyze
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Slack Notification
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: |
+            {
+              "text": "Code Analysis Results",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Code Analysis Complete*\nRepository: ${{ github.repository }}\nBranch: ${{ github.ref }}\nStatus: ${{ needs.analyze.result }}"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} 

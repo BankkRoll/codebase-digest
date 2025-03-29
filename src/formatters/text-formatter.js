@@ -7,9 +7,14 @@
  */
 
 import path from "path";
+import { defaultConfig } from "../config/defaults.js";
 import { getLanguageForExtension } from "../config/language-map.js";
 import { logger } from "../utils/logger.js";
 import { formatFileSize } from "../utils/metadata.js";
+
+// Header styling constants
+const HEADER_LINE = "=".repeat(50);
+const SUBHEADER_LINE = "-".repeat(50);
 
 /**
  * Formats file contents as plain text
@@ -21,56 +26,53 @@ import { formatFileSize } from "../utils/metadata.js";
 export const formatText = (fileContents, config = {}) => {
   logger.debug("Formatting output as plain text");
 
-  // Set default configuration
-  const defaultConfig = {
-    includeFileSeparator: true,
-    includeFileHeader: true,
-    includeByteSize: true,
-    includeLastModified: true,
-    includeFileHash: true,
-    includeMimeType: true,
-    includeLineNumbers: false,
-  };
-
-  // Merge with provided config
+  // Merge with default config
   config = { ...defaultConfig, ...config };
 
   let output = "";
-  const separator = "=".repeat(50) + "\n\n";
+
+  // Add main header
+  output += `${HEADER_LINE}\n`;
+  output += "Code Digest\n";
+  output += `${HEADER_LINE}\n\n`;
 
   fileContents.forEach((file, index) => {
     if (config.includeFileSeparator && index > 0) {
-      output += separator;
+      output += `${HEADER_LINE}\n\n`;
     }
 
     // Add file header if enabled
     if (config.includeFileHeader) {
+      output += `${SUBHEADER_LINE}\n`;
       output += `File: ${file.path}\n`;
+      output += `${SUBHEADER_LINE}\n\n`;
 
+      output += "File Information:\n";
       if (config.includeByteSize) {
-        output += `Size: ${formatFileSize(file.size)}\n`;
+        output += `- Size: ${formatFileSize(file.size)}\n`;
       }
 
       if (config.includeLastModified && file.modified) {
-        output += `Modified: ${file.modified.toISOString()}\n`;
+        output += `- Modified: ${file.modified.toISOString()}\n`;
       }
 
       if (config.includeFileHash && file.hash) {
-        output += `${config.hashAlgorithm?.toUpperCase() || "HASH"}: ${file.hash}\n`;
+        output += `- ${config.hashAlgorithm?.toUpperCase() || "HASH"}: ${file.hash}\n`;
       }
 
       if (config.includeMimeType && file.mimeType) {
-        output += `MIME Type: ${file.mimeType}\n`;
+        output += `- MIME Type: ${file.mimeType}\n`;
       }
 
       // Add language info
       const ext = file.extension || path.extname(file.path).substring(1);
       const language = getLanguageForExtension(ext);
       if (language) {
-        output += `Language: ${language}\n`;
+        output += `- Language: ${language}\n`;
       }
 
-      output += separator;
+      output += "\nFile Contents:\n";
+      output += `${SUBHEADER_LINE}\n`;
     }
 
     if (file.error) {
@@ -96,6 +98,9 @@ export const formatText = (fileContents, config = {}) => {
       output += output.endsWith("\n") ? "\n" : "\n\n";
     }
   });
+
+  // Add final footer
+  output += HEADER_LINE + "\n";
 
   return output;
 };
