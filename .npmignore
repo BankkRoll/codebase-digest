@@ -1,0 +1,119 @@
+# Source and development files
+/src/
+/tests/
+/test/
+/examples/
+/docs/
+/scripts/
+/__tests__/
+/__mocks__/
+*.test.js
+*.spec.js
+*.test.ts
+*.spec.ts
+/coverage/
+/.nyc_output/
+
+# Build and tooling
+/tsconfig.json
+/rollup.config.js
+/webpack.config.js
+/babel.config.js
+/jest.config.js
+/.eslintrc*
+/.prettierrc*
+/.stylelintrc*
+/gulpfile.js
+/.editorconfig
+/.travis.yml
+/.github/
+/.circleci/
+/.gitlab-ci.yml
+/.jenkins*
+/azure-pipelines.yml
+
+# Development environment
+/.vscode/
+/.idea/
+/.vs/
+*.sublime-*
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Dependencies
+/node_modules/
+/.pnp/
+.pnp.js
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Logs and debugging
+/logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+debug.log
+
+# Environment and config
+.env*
+!.env.example
+*.config.js
+!jest.config.js
+!rollup.config.js
+!webpack.config.js
+!babel.config.js
+
+# Cache and temporary files
+.cache/
+.parcel-cache/
+.npm/
+.eslintcache
+.stylelintcache
+.prettiercache
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Project specific
+.digest-cache/
+/output/
+/reports/
+*.digest.json
+*.digest.md
+*.digest.txt
+
+# Documentation and assets
+/assets/
+/images/
+/media/
+/docs/
+/wiki/
+*.md
+!README.md
+!LICENSE.md
+!CHANGELOG.md
+
+# Git and version control
+.git/
+.gitignore
+.gitattributes
+.gitmodules
+
+# Build artifacts
+*.tsbuildinfo
+/dist/
+/build/
+/lib/
+/out/
+/public/
+/static/
+*.min.js
+*.min.css
+*.map
+

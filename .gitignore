@@ -1,0 +1,76 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build outputs
+dist/
+build/
+lib/
+coverage/
+.nyc_output/
+*.tsbuildinfo
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Environment and config
+.env
+.env.*
+!.env.example
+*.config.js
+!jest.config.js
+!rollup.config.js
+!webpack.config.js
+!babel.config.js
+
+# Logs and debugging
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+debug.log
+
+# Testing
+/coverage
+/.nyc_output
+/test-results/
+
+# Cache directories
+.npm/
+.eslintcache
+.stylelintcache
+.prettiercache
+.cache/
+.parcel-cache/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Project specific
+.digest-cache/
+output/
+reports/
+*.digest.json
+*.digest.md
+*.digest.txt
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
