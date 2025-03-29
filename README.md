@@ -40,7 +40,9 @@ Codebase Digest transforms source code repositories into structured text represe
 ```bash
 # Global installation
 npm install -g codebase-digest
+```
 
+```bash
 # Local project installation
 npm install --save-dev codebase-digest
 ```
@@ -50,7 +52,9 @@ npm install --save-dev codebase-digest
 ```bash
 # CLI usage
 codebase-digest ./src -f json -o output.json
+```
 
+```bash
 # Node.js usage
 import { processDirectory } from 'codebase-digest';
 const result = await processDirectory('./src');

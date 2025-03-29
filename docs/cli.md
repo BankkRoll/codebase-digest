@@ -15,7 +15,9 @@
 ```bash
 # Global installation
 npm install -g codebase-digest
+```
 
+```bash
 # Local project installation
 npm install --save-dev codebase-digest
 ```
@@ -25,10 +27,14 @@ npm install --save-dev codebase-digest
 ```bash
 # Basic directory processing
 codebase-digest ./src
+```
 
+```bash
 # Specify output format and file
 codebase-digest ./src -f json -o output.json
+```
 
+```bash
 # Process with specific configuration
 codebase-digest ./src --config digest.config.json
 ```
@@ -188,7 +194,9 @@ Example output:
 ```bash
 # Create default config
 codebase-digest init > digest.config.json
+```
 
+```bash
 # Use config file
 codebase-digest ./src --config digest.config.json
 ```
@@ -251,10 +259,14 @@ DIGEST_LOG_FILE=digest.log
 ```bash
 # Process current directory
 codebase-digest .
+```
 
+```bash
 # Process specific directory with output
 codebase-digest ./src -o digest.json
+```
 
+```bash
 # Use specific format
 codebase-digest ./src -f markdown
 ```
@@ -268,7 +280,9 @@ codebase-digest ./src \
   --syntax-highlight \
   --metadata \
   -o DOCUMENTATION.md
+```
 
+```bash
 # Security audit
 codebase-digest ./src \
   -f json \
@@ -276,7 +290,9 @@ codebase-digest ./src \
   --hash-files \
   --detect-secrets \
   -o security-report.json
+```
 
+```bash
 # Code analysis
 codebase-digest ./src \
   --statistics \
