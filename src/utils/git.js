@@ -46,7 +46,9 @@ export async function getGitStats(filePath, directory) {
     // Get the relative path to the file from the repository root
     const { stdout: repoRoot } = await execAsync(
       "git rev-parse --show-toplevel",
-      { cwd: directory },
+      {
+        cwd: directory,
+      },
     );
     const relativePath = filePath
       .replace(repoRoot.trim(), "")
